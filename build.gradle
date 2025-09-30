@@ -20,15 +20,37 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+    // Swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4'
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // H2 Database
     runtimeOnly 'com.h2database:h2'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    // Embedded Redis
-    implementation 'it.ozimov:embedded-redis:0.7.3'
+    // Spring Boot Redis Starter
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // Embedded Redis (테스트용)
+    implementation 'it.ozimov:embedded-redis:0.7.2'
+
+    // Optional: SLF4J Conflict 해결 (필요시)
+    implementation('it.ozimov:embedded-redis:0.7.2') {
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
 }
 
 tasks.named('test') {
